@@ -1,0 +1,35 @@
+const express = require("express")
+
+const server = express()
+
+// Query params = ?nome=Carlos&idade=20
+// http://localhost:3000/hello?nome=Carlos&idade=20
+
+// Route parms = /hello/:nome
+// http://localhost:3000/hello/Carlos
+
+server.get("/hello", (request, response) => {
+
+  const {nome, idade}  = request.query
+
+  return response.json(
+    {
+      name: nome,
+      mensage: `Olá ${nome}, tudo bem?`,
+      age: idade
+    }
+  )
+})
+server.get("/hello/:nome", (request, response) => {
+
+  const nome = request.params.nome
+
+  return response.json(
+    {
+      name: nome,
+      mensage: `Olá ${nome}, tudo bem?`,
+    }
+  )
+})
+
+server.listen(3000)
